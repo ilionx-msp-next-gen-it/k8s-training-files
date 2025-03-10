@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: ""
+  namespace: ""
+spec:
+  hostnames:
+    - "".dev.solmate.online
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: applications
+      namespace: ns-mgmt-op-traefik-gateway-applications
+      sectionName: websecure-wildcard-solmate
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: ""
+          port: ""
