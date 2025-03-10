@@ -12,4 +12,4 @@
 
 3. Maak een container in Docker die gebruik maakt van deze image en de webpagina bereikbaar maakt op poort 80
 
-4. Test de webpagina
+4. Test de webpagina op http://localhost/
