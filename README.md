@@ -1,1 +1,1 @@
-# kubernetes-cursus
+# Kubernetes-training-files
