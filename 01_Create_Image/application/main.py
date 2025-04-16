@@ -24,10 +24,12 @@ COLOR_FROM_ENV = os.environ.get('APP_COLOR')
 COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink"])
 # Set default color source
 COLOR_SOURCE = "random"
+# Set default banner text
+LOGO_STYLE_ID = "logo_k8s_effect" if os.environ.get('EFFECT') == "true" else "logo_k8s"
 
 @app.route("/")
 def main():
-    return render_template('index.html', name=socket.gethostname(), color=color_codes[COLOR], color_source=COLOR_SOURCE)
+    return render_template('index.html', name=socket.gethostname(), color=color_codes[COLOR], color_source=COLOR_SOURCE, logo_style_id=LOGO_STYLE_ID)
 
 if __name__ == "__main__":
 
