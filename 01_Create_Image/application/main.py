@@ -1,3 +1,12 @@
+from flask import Flask
+from flask import render_template
+import socket
+import random
+import os
+import argparse
+
+app = Flask(__name__)
+
 color_codes = {
     "red": "#e8003d",
     "green": "#16a085",
