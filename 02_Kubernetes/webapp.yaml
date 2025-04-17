@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - image: smgwemgmtcrcrescendo001.azurecr.io/cursus/ilionx-webapp
+          name: webapp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  selector:
+    app: webapp
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  type: ClusterIP
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: webapp-httproute
+spec:
+  hostnames:
+    - "".dev.solmate.online
+  parentRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: applications
+      namespace: ns-mgmt-op-traefik-gateway-applications
+      sectionName: websecure-wildcard-solmate
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: webapp-service
+          port: 80
